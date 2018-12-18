@@ -1,107 +1,237 @@
-\chapter{First Definitions}
-Representation Theory studies groups in terms of their actions on different vector spaces over some field. Let us give the first definition:
+\chapter{Representations and intertwining operators}
+Representation Theory studies groups in terms of their actions on different vector spaces over some field.
+
+\section{First definitions}
 
 \begin{definition} Let $G$ be a group and $\mathbf{k}$ be a field. A pair $(\rho:G\to\GL{V},V)$ is called a \ul{representation} of $G$ over $\mathbf{k}$ (or a $\mathbf{k}$-representation of $G$), if $V$ is some vector space over $\mathbf{k}$ and $\rho$ is a group homomorphism. The number $\dim_{\mathbf{k}}V$ is called the \ul{dimension} of the representation.
+
+For any representation $(\rho,V)$ with $\dim_{\mathbf{k}}V=n<+\infty$ and any fixed basis $\mathcal{B}$ of $V$, denote with $\rho^{\mathcal{B}}:G\to M_{n\times n}(\mathbf{k})$ the function taking $g$ to the $n$ by $n$ matrix of $\rho(g)$, with respect to $\mathcal{B}$.
 \end{definition}
-
-Before we go on, let us be sure we have understood this definition:
-
 \begin{examples}
 \begin{i_enum}
-\item The first example is going to be the picture you could have in mind for a typical $\mathbf{k}$-representation of $G$: Let $\mathbf{k}=\mathbb{R}$ and $G=D_{6}=\left<r,s:r^3=s^2=(rs)^2=e\right>$ the dihedral group of order $6$. Then define $\rho:D_6\to\GL{\mathbb{R}^2}$ as follows:
+\item The first example is going to be the picture one can have in mind for a typical $\mathbf{k}$-representation of $G$: Let $\mathbf{k}=\mathbb{R}$ and $G=D_{6}=\left<r,s:r^3=s^2=(rs)^2=e\right>$ the dihedral group of order $6$. Then define $\rho:D_6\to\GL{\mathbb{R}^2}$ as follows: Let $\mathcal{E}$ be the standard basis of $\mathbb{R}^2$ and let the corresponding matrices of $\rho(g)$ w.r.t. this basis be:
 $$\begin{array}{lclcl}
-\rho(e)=\twocols{1}{0}{0}{1}&&\rho(r)=\twocols{-\frac{1}{2}}{\frac{\sqrt{3}}{2}}{-\frac{\sqrt{3}}{2}}{-\frac{1}{2}}&&\rho(r^2)=\twocols{-\frac{1}{2}}{-\frac{\sqrt{3}}{2}}{\frac{\sqrt{3}}{2}}{-\frac{1}{2}}\\[2em]
-\rho(s)=\twocols{1}{0}{0}{-1}&&\rho(rs)=\twocols{-\frac{1}{2}}{\frac{\sqrt{3}}{2}}{\frac{\sqrt{3}}{2}}{\frac{1}{2}}&&\rho(r^2s)=\twocols{-\frac{1}{2}}{-\frac{\sqrt{3}}{2}}{-\frac{\sqrt{3}}{2}}{\frac{1}{2}}\\
+\rho^{\mathcal{E}}(e)=\twocols{1}{0}{0}{1}&&\rho^{\mathcal{E}}(r)=\twocols{-\frac{1}{2}}{\frac{\sqrt{3}}{2}}{-\frac{\sqrt{3}}{2}}{-\frac{1}{2}}&&\rho^{\mathcal{E}}(r^2)=\twocols{-\frac{1}{2}}{-\frac{\sqrt{3}}{2}}{\frac{\sqrt{3}}{2}}{-\frac{1}{2}}\\[2em]
+\rho^{\mathcal{E}}(s)=\twocols{1}{0}{0}{-1}&&\rho^{\mathcal{E}}(rs)=\twocols{-\frac{1}{2}}{\frac{\sqrt{3}}{2}}{\frac{\sqrt{3}}{2}}{\frac{1}{2}}&&\rho^{\mathcal{E}}(r^2s)=\twocols{-\frac{1}{2}}{-\frac{\sqrt{3}}{2}}{-\frac{\sqrt{3}}{2}}{\frac{1}{2}}\\
 \end{array}$$
 \item The next example is going to be again an $\mathbb{R}$-representation of $D_6$. Define $\tilde{\rho}:D_6\to\GL{\mathbb{R}^2}$ as follows:
 $$\begin{array}{lclcl}
-\rho(e)=\twocols{1}{0}{0}{1}&&\rho(r)=\twocols{0}{1}{-1}{-1}&&\rho(r^2)=\twocols{-1}{-1}{1}{0}\\[2em]
-\rho(s)=\twocols{1}{0}{-1}{-1}&&\rho(rs)=\twocols{0}{1}{1}{0}&&\rho(r^2s)=\twocols{-1}{-1}{0}{1}\\[2em]
+\tilde{\rho}^{\mathcal{E}}(e)=\twocols{1}{0}{0}{1}&&\tilde{\rho}^{\mathcal{E}}(r)=\twocols{0}{1}{-1}{-1}&&\tilde{\rho}^{\mathcal{E}}(r^2)=\twocols{-1}{-1}{1}{0}\\[2em]
+\tilde{\rho}^{\mathcal{E}}(s)=\twocols{1}{0}{-1}{-1}&&\tilde{\rho}^{\mathcal{E}}(rs)=\twocols{0}{1}{1}{0}&&\tilde{\rho}^{\mathcal{E}}(r^2s)=\twocols{-1}{-1}{0}{1}\\[2em]
 \end{array}$$
-Notice that this representation is very similar to the first one and in fact it becomes exactly the same with a change of basis. Arguments like that will become much more rigorous in the future.
+where $\mathcal{E}$ is again the standard basis of $\mathbb{R}^2$.
+
+Notice that this representation is very similar to the first one, since they both permute three affinely independent vectors of $\mathbb{R}^2$. In fact, the corresponding matrices are conjugate, i.e. they become equal under a change of basis.
 \item Yet another representation of the same group: Let $\mathbf{k}=\mathbb{R}$ and $G=S_3\cong D_6$ the permutation of three elements. Define $\pi_3:S_3\to\GL{\mathbb{R}^3}$ as:
 $$\pi_3(\sigma)(e_i):=e_{\sigma(i)}$$
-on the basis elements and extend linearly, for every $\sigma\in S_3$. Notice that this acts on the subspace $V:=\{(x_1,x_2,x_3)^t:x_1+x_2+x_3=0$ just like $\rho$ and $\tilde{\rho}$, but now the representation lives in one dimension higher and we must examine how the representation looks like, restricted to $V^{\perp}$.
-\item The good news is that the following representation was not the first example in the list: Let $\mathbf{k}$ be any field and $G$ be any group. Then define the trivial representation $tr:G\to\GL{\mathbf{k}}$ as:
-$$tr(g)(x)=x$$
-for all $x\in\mathbf{k}$ and all $g\in G$. Notice that the vector space is one dimensional over $\mathbf{k}$ in this example.
+on the basis elements (and extend linearly for every $v\in\mathbb{R}^3$), for every $\sigma\in S_3$. Notice that this acts on the subspace $V:=\{(x_1,x_2,x_3)^t:x_1+x_2+x_3=0$ just like $\rho$ and $\tilde{\rho}$, but now the representation lives in one dimension higher and if we wanted to fully characterize this representation, we should examine how the representation looks like in $\faktor{\mathbb{R}^2}{V}$.
+\item The list of examples could not be complete without a trivial example. The following representation is the representation where every element of the group acts trivially on an $1$-dimensional vector space. It may not seem like much, but we need this representation, if we want to be able to distinguish between representations ``doing the same thing in different dimensions'', like in the examples above. Let $\mathbf{k}$ be any field and $G$ be any group. Then define the trivial representation $\rho_0:G\to\GL{\mathbf{k}}$ as:
+$$\rho_0(g)(x)=x$$
+for all $x\in\mathbf{k}$ and all $g\in G$. Notice that the dimension of $\rho_0$ is equal to $1$.
 \item Let us also see an example involving an infinite group: Let $\mathbf{k}=\mathbb{C}$ and $G=S^1$ with operation the complex product and let $f_5:S^1\to\GL{\mathbb{C}}$ be the function:
 $$f_5(e^{i\theta})(z)=e^{5i\theta}\cdot z$$
-for every $z\in\mathbb{C}$, for every $e^{i\theta}\in S^1$. Then $f_5$ is a complex representation of $S^1$ as a group, which also respects the topology of $S^1$. This is not going to play any role in our analysis at first, but it is good to keep in mind that representations of Lie groups should also respect the topology.
+for every $z\in\mathbb{C}$, for every $e^{i\theta}\in S^1$. Then $f_5$ is a complex representation of $S^1$ as a group, which also respects the topology of $S^1$. This is not going to play any role in our analysis at first, but it is good to keep in mind that representations of Lie groups should also respect the topology. Notice that the above example works for any integer $n$ in the place of the $5$ (and only for integers).
 \end{i_enum}
 \end{examples}
 
-Our goal is to understand the different representations of a group over some field. In order to do that, we should first define maps between representations, which respect the $G$-action:
+Our goal is to understand the different representations of a group over some field. In order to do that, we should first define maps between representations, which respect both the linear space and the $G$-action:
 
-\begin{definition} Let $G$ be a group, $\mathbf{k}$ be a field and $(\rho_1,V_1)$, $(\rho_2,V_2)$ be two $\mathbf{k}$-representations of $G$. Then a linear map $L:V_1\to V_2$ is called an \ul{intertwining} map (or $G$-map, or $G$-\ul{equivariant} map), if the following diagram commutes for every $g\in G$:
+\begin{definition} Let $G$ be a group, $\mathbf{k}$ be a field and $(\rho_1,V_1)$, $(\rho_2,V_2)$ be two $\mathbf{k}$-representations of $G$. Then the function $L:V_1\to V_2$ is called an \ul{intertwining operator}, if the following is true:
+\begin{i_enum}
+\item $L$ is a $\mathbf{k}$-linear map, i.e.
+$$L(\lambda u+\mu v)=\lambda L(u)+\mu L(v)$$
+for every $\lambda,\mu\in\mathbf{k}$ and $u,v\in V_1$.
+\item $L$ is a $G$-equivariant map, i.e.
 \begin{center}
 \begin{tikzcd}
 V_1\ar[r,"L"]\ar[d,"\rho_1(g)"']&V_2\ar[d,"\rho_2(g)"]\\
 V_1\ar[r,"L"]&V_2
 \end{tikzcd}
 \end{center}
-
-Denote with $\Hom_G(V_1,V_2)$ the set of all intertwining maps from the representation $(\rho_1,V_1)$ to $(\rho_2,V_2)$.
+commutes for every $g\in G$.
+\end{i_enum}
+Denote with $\Hom_G(V_1,V_2)$ the set of all intertwining operators from the representation $(\rho_1,V_1)$ to $(\rho_2,V_2)$.
 \end{definition}
 
 Note that we already dropped $\rho$ from the representations notation, although a representation relies heavily on $\rho$. The reader should most probably get used to it, because it is very common in the bibliography to hide the action itself from the notation, if it is implied (even if it is not, unfortunately).
 
 Having the above definitions lets us define the following category:
 
-\begin{definition} Given a group $G$ and a field $\mathbf{k}$, the category of $\mathbf{k}$-representations of $G$ is denoted with $\mathcal{Rep}_{\mathbf{k}}(G)$. The objects in this category are the representations of $G$ over $\mathbf{k}$ and the morphisms are the intertwining maps between these representations.
+\begin{definition} Given a group $G$ and a field $\mathbf{k}$, the category of $\mathbf{k}$-representations of $G$ is denoted with $\mathcal{Rep}_{\mathbf{k}}(G)$. The objects in this category are the representations of $G$ over $\mathbf{k}$ and the morphisms are the intertwining operators between these representations.
 \end{definition}
 
 At this point we should define the notions of isomorphism, subobject and quotient object in this category:
 
-\begin{definition} Let $(\rho_1, V_1)$ and $(\rho_2, V_2)$ be two $\mathbf{k}$-representations of $G$. An intertwining map $L:V_1\to V_2$ is an \ul{isomorphism}, if $L$ is invertible as a map between vector spaces.
+\begin{definition} Let $(\rho_1, V_1)$ and $(\rho_2, V_2)$ be two $\mathbf{k}$-representations of $G$. An intertwining operator $L:V_1\to V_2$ is an \ul{isomorphism}, if $L$ is an invertible function.
 
 If there exists an isomorphism between two representations, then they are called \ul{equivalent} (or \ul{isomorphic}) and we write $V_1\cong V_2$.
 \end{definition}
 
-Note that if an intertwining map $L:V_1\to V_2$ is invertible as a map between vector spaces, then the inverse map $L^{-1}:V_2\to V_1$ is also an intertwining map. Indeed, we have $L\circ\rho_1(g)=\rho_2(g)\circ L$, which gives us $\rho_1(g)\circ L^{-1}=L^{-1}\circ\rho_2(g)$, if we compose with $L^{-1}$ on both sides.
+Note that if an intertwining operator $L:V_1\to V_2$ is an invertible function, then the inverse map $L^{-1}:V_2\to V_1$ is also an intertwining operator. Indeed:
+\begin{i_enum}
+\item $L^{-1}$ is $\mathbf{k}$-linear, since $L$ is $\mathbf{k}$-linear, and
+\item $L^{-1}$ is $G$-equivariant, since $L$ is $G$-equivariant: $L\circ\rho_1(g)=\rho_2(g)\circ L$ gives us $\rho_1(g)\circ L^{-1}=L^{-1}\circ\rho_2(g)$, if we compose with $L^{-1}$ on both sides.
+\end{i_enum}
 
-\begin{definition} Let $(\rho, V)$ be a $\mathbf{k}$-representation of $G$ and $U\leq W$ be a linear subspace of $V$, which is preserved under the action of $G$, i.e. we have
+\begin{proposition} Let $(\rho_1,V_1)$ and $(\rho_2,V_2)$ be two $\mathbf{k}$ representations of $G$, of dimension $n<+\infty$ and let $\mathcal{B}_1$ and $\mathcal{B}_2$ be any bases of $V_1$ and $V_2$ respectively. Then, $V_1\cong V_2$, if and only if $\rho_1^{\mathcal{B}_1}$ is uniformly conjugate with $\rho_2^{\mathcal{B}_2}$, i.e. there is a unique matrix making them conjugate, for all $g\in G$.
+\end{proposition}
+\begin{proof} Let $L:V_1\to V_2$ be an isomorphism and $A_{\mathcal{B}_1,\mathcal{B}_2}(L)\in M_{n\times n}(\mathbf{k})$ the matrix of $L$, w.r.t. $\mathcal{B}_1,\mathcal{B}_2$. Then, the relation $L\circ\rho_1(g)=\rho_2(g)\circ L$ for all $g\in G$ is equivalent to:
+$$A_{\mathcal{B}_1,\mathcal{B}_2}(L)\rho_1^{\mathcal{B}_1}(g)=\rho_2^{\mathcal{B}_2}(g)A_{\mathcal{B}_1,\mathcal{B}_2}(L)$$
+for all $g\in G$, which proves the assertion.
+\end{proof}
+
+\begin{remark}\label{rem:one_conj} Note, that conjugate $1$ by $1$ matrices are equal. Therefore, isomorphism classes of one-dimensional $\mathbf{k}$-representations of $G$, correspond bijectively to homomorphisms $G\to GL(\mathbf{k})=K^*$.
+\end{remark}
+
+\begin{definition} Let $(\rho, V)$ be a $\mathbf{k}$-representation of $G$ and $U\leq V$ be a $G$-invariant linear subspace of $V$, i.e.
 $$\rho(g)(U)\leq U$$
 for every $g\in G$. Then, both $U$ and $\faktor{V}{U}$ can be equipped with a $G$ action, inherited from $\rho$, as follows:
 \begin{i_enum}
-\item Define $\rho_i:G\to\GL{U}$ with
-$$\rho_i(g)(u):=\rho(g)|_U(u)$$
-for every $u\in U$. Then the pair $(\rho_i,U)$ is a $\mathbf{k}$-representation of $G$ and this is called a \ul{subrepresentation} of $(\rho,V)$.
-\item Define $\rho_p:G\to\GL{\faktor{V}{U}}$ with
-$$\rho_p(g)(v+U):=\rho(g)(v)+U$$
-for every $v+U\in\faktor{V}{U}$. Then the pair $(\rho_p,\faktor{V}{U})$ is a $\mathbf{k}$-representation of $G$ and this is called a \ul{quotient representation} of $(\rho,V)$.
+\item Define $\rho|:G\to\GL{U}$ with
+$$\rho|(g)(u):=\rho(g)|_U(u)$$
+for every $u\in U$. Then the pair $(\rho|,U)$ is a $\mathbf{k}$-representation of $G$ and this is called a \ul{subrepresentation} of $(\rho,V)$.
+\item Define $\tilde{\rho}:G\to\GL{\faktor{V}{U}}$ with
+$$\tilde{\rho}(g)(v+U):=\rho(g)(v)+U$$
+for every $v+U\in\faktor{V}{U}$. Then the pair $(\tilde{\rho},\faktor{V}{U})$ is a $\mathbf{k}$-representation of $G$ and this is called a \ul{quotient representation} of $(\rho,V)$.
 \end{i_enum}
 \end{definition}
 
-The actions given above for the subrepresentation and for the quotient representation are in fact imposed on $U$ and $\faktor{V}{U}$ if we want the maps of the inclusion and the projection to be intertwining maps.
+The actions given above for the subrepresentation and for the quotient representation are in fact imposed on $U$ and $\faktor{V}{U}$ if we want the maps of the inclusion and the projection to be intertwining operators.
 
-The next logical step into understanding the different $\mathbf{k}$ representations of a group, is to first identify the smallest elements in the poset induced by the ordering of being a subrepresentation and hope that we could use them as building blocks for every other representation. This approach unfortunately fails, in the full generality of representation theory, but soon we are going to restrict ourselves in cases, where this approach is going to be proven fruitful.
+%TODO: is this an abelian category??
+\begin{remark} Let $(\rho_1,V_1)$ and $(\rho_2,V_2)$ be two $\mathbf{k}$-representations of $G$ and let $L:V_1\to V_2$ be an intertwining operator between them. Then, the vector spaces $\ker L$ and $\im L$ are $G$-invariant.
+\end{remark}
+\begin{proof} \begin{i_enum}
+\item Let $v_1\in\ker L$ and $g\in G$. Then:
+$$L(\rho_1(g)(v_1))=\rho_2(g)(Lv_1)=\rho_2(g)(0)=0$$
+which means $\rho_1(g)(v_1)\in\ker L$.
+\item Let $v_2\in\im L$ and $g\in G$. This means that there exists some $v_1\in V_1$ with $Lv_1=v_2$. Then:
+$$L(\rho_1(g)(v_1))=\rho_2(g)(Lv_1)=\rho_2(g)(v_2)$$
+which means $\rho_2(g)(v_2)\in\im L$.
+\end{i_enum}
+\end{proof}
+
+This remark tells us, that for any intertwining operator $L:V_1\to V_2$, $\ker L$ and $\im L$ are subrepresentations of $V_1$ and $V_2$ respectively and $\coker L$, $\coim L$ are quotient representations of $V_2$ and $V_1$ respectively.
+
+The next logical step into understanding the different $\mathbf{k}$ representations of a group, is to identify the representations that can play the role of building blocks for every other.
 
 Note that given a representation $(\rho,V)$, one can always find the following two subrepresentations:
 \begin{i_enum}
-\item the trivial representation $(\rho_0,\{0\})$, and
+\item the zero representation $(\mathrm{const}_0,\{0\})$, and
 \item the representation itself $(\rho,V)$.
 \end{i_enum}
 
-\begin{definition} A $\mathbf{k}$-representation of $G$ $(\rho,V)$ is called \ul{irreducible}, if there are no proper, non-trivial subrepresentations of $(\rho,V)$.
+\begin{definition} A $\mathbf{k}$-representation of $G$ $(\rho,V)$ is called \ul{irreducible}, if there are no proper, non-zero subrepresentations of $(\rho,V)$.
 
 If a representation is not irreducible, it is called \ul{reducible}.
 \end{definition}
 
-The next step in proceeding would be to try to go the other way around, namely to construct new representations from old ones. There are many ways to do so and we have devoted for them their own chapter. For now, we are going to just be interested in the direct sum of two representations:
+The next lemma makes it clear, why irreducible representations are behaved nicely as building blocks, since it examines how $\Hom_G(V_1,V_2)$ looks like if $V_1,V_2$ are irreducible:
+
+\begin{lemma}[Schur] Let $(\rho_1,V_1)$ and $(\rho_2,V_2)$ be two irreducible $\mathbf{k}$-representations over $G$. Then:
+\begin{i_enum}
+\item An intertwining operator between $V_1$ and $V_2$ is either zero, or an isomorphism.
+\item If $\mathbf{k}$ is algebraically closed and $(\rho_1,V_1)=(\rho_2,V_2)$, then any intertwining operator between $V_1$ and $V_2$ is a scalar multiple of the identity function.
+\end{i_enum}
+Thus, for $\mathbf{k}$ algebraically closed, we have the following isomorphism of $\mathbf{k}$-algebras:
+$$\Hom_G(V_1,V_2)\cong\left\{\begin{array}{lcl}\mathbf{k}&,&V_1\cong V_2\\0&,&V_1\not\cong V_2\\\end{array}\right.$$
+for every two irreducible representations $V_1,V_2$.
+\end{lemma}
+\begin{proof} \begin{i_enum}
+\item Let $L:V_1\to V_2$ be an intertwining operator. Then $\ker L$ is a subrepresentation of $V_1$ and $\im L$ is a subrepresentation of $V_2$. If $L\neq 0$, $\ker L=\{0\}$ and $\im L=V_2$, since $V_1,V_2$ are irreducible. Thus, $L$ is an isomorphism.
+\item Let $(\rho_1,V_1)=(\rho_2,V_2)=(\rho,V)$ and $L:V\to V$ be an intertwining operator. Since $\mathbf{k}$ is algebraically closed, $L$ has an eigenvalue $\lambda\in\mathbf{k}$. The eigenspace $V_{\lambda}$ is a subrepresentation of $V$. Indeed, let $v\in V_{\lambda}$ and $g\in G$. Then:
+$$L(\rho(g)(v))=\rho(g)(Lv)=\rho(g)(\lambda v)=\lambda\rho(g)(v)$$
+which means that $\rho(g)(v)\in V_{\lambda}$. Since $V$ is irreducible, and $V_{\lambda}\neq\{0\}$, we get $V_{\lambda}=V$, i.e. $Lv=\lambda v$, for every $v\in V$, or:
+$$L=\lambda\cdot\mathrm{id}_V$$
+\end{i_enum}
+\end{proof}
+
+In the next mini-section we are going to fully categorize the irreducible complex-representations of any finite abelian group, based on the following result:
+
+\begin{proposition}\label{prop:one_dim}If $\mathbf{k}$ is algebraically closed, any irreducible $\mathbf{k}$-representation of an abelian group $G$ is one-dimensional.
+\end{proposition}
+\begin{proof} Let $(\rho,V)$ be an irreducible $\mathbf{k}$-representation of $G$. For any group element $h\in G$, denote the function $\rho(h):V\to V$ also by $l_h$ and think of it as the \ul{left translation} by $h$. Then, in the special case of abelian Groups, $l_h$ is an intertwining operator from $V$ to $V$ for all $h\in G$, since commutativity of the diagram:
+\begin{center}
+\begin{tikzcd}
+V\ar[r,"l_h"]\ar[d,"\rho(g)"']&V\ar[d,"\rho(g)"]\\
+V\ar[r,"l_h"]&V\\
+\end{tikzcd}
+\end{center}
+for every $g\in G$ means that $\rho(gh)(v)=\rho(hg)(v)$ for every $g\in G$ and $v\in V$. Assuming that $(\rho,V)$ is irreducible and $\mathbf{k}$ is algebraically closed, Schur's lemma gives us for every $h\in G$:
+$$l_h(v)=\lambda_h v$$
+for some $\lambda_h\in\mathbf{k}$. In particular, for every $h\in G$, we get $\rho(h)\left(\left<v\right>\right)\leq\left<v\right>$, for every $v\in V$, i.e. $V$ has to be one-dimensional.
+\end{proof}
+
+\section{Irreducible complex representations of finite abelian groups}
+We are already able to precisely describe every $\mathbb{C}$-representation of a finite abelian group $G$. Before we do so, let us define something, which is going to be also useful in the future. Namely the character group of a group:
+
+\begin{definition} Let $G$ be any group. The set $X(G)$ of all group homomorphisms $G\to\mathbb{C}^*$ becomes a group under the complex multiplication:
+$$(\rho_1\cdot\rho_2)(g):=\rho_1(g)\rho_2(g)$$
+This is called the \ul{character group} of $G$.
+\end{definition}
+
+\begin{remark} Any group homomorphism $\phi:G_1\to G_2$ between some groups $G_1$ and $G_2$ induces a homomorphism $X(\phi):X(G_2)\to X(G_1)$ between abelian groups:
+$$X(\phi)(\rho_2)=\rho_2\circ\phi$$
+This makes $X$ a contravariant functor from the category of groups to the category of abelian groups.
+\end{remark}
+
+\begin{lemma}\label{lem:grp_prod} For any groups $G_1,G_2$, the function $f:X(G_1)\times X(G_2)\to X(G_1\times G_2)$ defined by $f(\rho_1,\rho_2)=\rho_1\odot\rho_2$ is a group isomorphism, where:
+$$(\rho_1\odot\rho_2)(g_1,g_2):=\rho_1(g_1)\rho_2(g_2)$$
+for all $(g_1,g_2)\in G_1\times G_2$.
+\end{lemma}
+\begin{proof} The fact that $f$ is a group homomorphism can easily be checked. Moreover:\begin{i_enum}
+\item $f$ is injective. Indeed, let $(\rho_1,\rho_2)\in\ker f$. This means, that $\rho_1(g_1)\rho_2(g_2)=1$ for every $(g_1,g_2)\in G_1\times G_2$. In particular for $g_2=1_{G_2}$, we have $\rho_1(g_1)=1$ for every $g_1\in G_1$ and similarly we also get $\rho_2(g_2)=1$ for every $g_2\in G_2$. This means then $(\rho_1,\rho_2)=1_{X(G_1)\times X(G_2)}$.
+\item $f$ is surjective. Indeed, let $\rho:G_1\times G_2\to\mathbb{C}^*$. Define $\rho_1:G_1\to\mathbb{C}^*$ to be $\rho_1(g_1):=\rho(g_1,1_{G_2})$ and, similarly, $\rho_2:G_2\to\mathbb{C}^*$ to be $\rho_2(g_2):=\rho(1_{G_1},g_2)$. Then:
+$$(\rho_1\odot\rho_2)(g_1,g_2)=\rho(g_1,1_{G_2})\rho(1_{G_1},g_2)=\rho(g_1,g_2)$$
+This means then $\rho_1\odot\rho_2\in\im f$.
+\end{i_enum}
+This proves the assertion.
+\end{proof}
+
+This lemma allows us to first examine the case of the cyclic groups:
+\begin{example} Let $\mathbf{k}=\mathbb{C}$ and $G=\mathbb{Z}_n$ for some $n\in\mathbb{N}$. Then, using Proposition \ref{prop:one_dim}, we know that if $(\rho,V)$ is an irreducible $\mathbb{C}$-representation of $\mathbb{Z}_n$, then $\dim V=1$. Remark \ref{rem:one_conj} then tells us that we are actually looking for all different homomorphisms $\rho:\mathbb{Z}_n\to\mathbb{C}^*$. These homomorphisms correspond bijectively to elements $z\in\mathbb{C}^*$ with
+$$z^n=1$$
+There are exactly $n$ different choices of such elements (the $n$-th roots of unity), giving us $\rho_0,\rho_1,\cdots,\rho_{n-1}$, $n$ non-isomorphic $\mathbb{C}$-representations of $\mathbb{Z}_n$, where:
+$$\rho_k(1)(z)=e^{\frac{2k\pi i}{n}}\cdot z$$
+for every $k\in\{0,\ldots,n-1\}$ and for every $z\in\mathbb{C}$. The fact that $\rho_k$ is a group homomorphism, lets us uniquely define the elements $\rho_k(a)\in\mathbb{C}^*$ for every $a\in\mathbb{Z}_n$ to be the multiplication with $\left(e^{\frac{2k\pi i}{n}}\right)^a$. This discussion categorizes fully the irreducible complex representations of $\mathbb{Z}_n$, up to isomorphism:
+\end{example}
+
+\begin{lemma} The different (up to isomorphism) irreducible complex representations of $\mathbb{Z}_n$ are the elements of $X(\mathbb{Z}_n)$, where:
+$$X(\mathbb{Z}_n)=\left<\rho_1|\rho_1^n\right>\cong\mathbb{Z}_n$$
+\end{lemma}
+
+This case suffices to categorize all irreducible complex representations of any finite abelian group:
+
+\begin{proposition} Let $G$ be a finite abelian group. Then the different (up to isomorphism) irreducible complex representations of $G$ are the elements of $X(G)$. Moreover, $X(G)\cong G$ as abelian groups.
+\end{proposition}
+\begin{proof} Since $G$ is abelian, an irreducible complex representation of $G$ is one dimensional, i.e. an element of $X(G)$. Due to the fundamental theorem of finite abelian groups, we know that $G$ is a free product of cyclic groups, each one of them is isomorphic to its character group. Lemma \ref{lem:grp_prod} then gives us that $X(G)\cong G$ as well.
+\end{proof}
+
+\begin{example} Let for example $G=\mathbb{Z}_4\times\mathbb{Z}_2$. Then, the above isomorphism gives us the following eight irreducible complex representations of $G$:
+$$\begin{array}{lclclcl}
+(\rho_0\odot\rho_0)(a,b)&=&1&&(\rho_0\odot\rho_1)(a,b)&=&(-1)^b\\
+(\rho_1\odot\rho_0)(a,b)&=&i^a&&(\rho_1\odot\rho_1)(a,b)&=&i^a(-1)^b\\
+(\rho_2\odot\rho_0)(a,b)&=&(-1)^a&&(\rho_2\odot\rho_1)(a,b)&=&(-1)^a(-1)^b\\
+(\rho_3\odot\rho_0)(a,b)&=&(-i)^a&&(\rho_3\odot\rho_1)(a,b)&=&(-i)^a(-1)^b\\
+\end{array}$$
+\end{example}
+
+\section{Indecomposable Representations}
+
+The next step in proceeding would be to try to construct new representations from old ones. There are many ways to do so and we have devoted for them their own section. For now, we are going to just be interested in the direct sum of two representations:
 
 \begin{definition} Let $(\rho_1,V_1)$ and $(\rho_2,V_2)$ be two $\mathbf{k}$-representations of $G$. Then the vector space $V_1\oplus V_2$ can be equipped with a $G$ action, inherited from $\rho_1,\rho_2$, as follows: Define $\rho_{\oplus}:G\to\GL{V_1\oplus V_2}$, with
 $$\rho_{\oplus}(g)(v_1,v_2):=(\rho_1(g)(v_1),\rho_2(g)(v_2))$$
 for every $(v_1,v_2)\in V_1\oplus V_2$. Then the pair $(\rho_{\oplus},V_1\oplus V_2)$ is called the \ul{direct sum} of the two representations.
 \end{definition}
 
-Notice that the imposed group action on the direct sum is the only action making the projection maps in each coordinate to be intertwining maps.
+Notice that the imposed group action on the direct sum is the only action making the projection maps in each coordinate to be intertwining operators.
 
 Given a vector space $V$ and a linear subspace $U\leq V$, one can always write the bigger space $V$ as a direct sum of $U$ with something else. We have for example that $V\cong U\oplus U^{\perp}$, or $V\cong U\oplus\faktor{V}{U}$, or in fact any subspace not intersecting $U$, maximal w.r.t. this property would do. In the representation theory the case isn't that simple always:
 
 \begin{example} Let $G=\mathbb{R}$ with addition and $\mathbf{k}=\mathbb{R}$. Define the representation $\rho:G\to\GL{\mathbb{R}^2}$ with:
 $$\rho(x)=\twocols{1}{0}{x}{1}$$
-If we try to compute an invariant subspace of this action, we are going to stumble across the following problem: The only eigenvalue of the matrix $\rho(x)$ is the $1$ and for $x\neq0$ its eigenspace is the space $U=\mathbb{R}\{(1,0)^t\}$, which is one dimensional. This means that our representation could not be written as the sum of two other representations. Notice that although both $U$ and $\faktor{\mathbb{R}^2}{U}$ are equipped with an $\rho$-induced action and also $U\oplus\faktor{\mathbb{R}^2}{U}\cong\mathbb{R}^2$ as vector spaces, the equivalence does not hold through for the additional structure of a representation. In fact we have:
+If we try to compute a proper non-trivial invariant subspace of this action, we are going to stumble across the following problem: Finding an one-dimensional invariant subspace, is equivalent to search for eigenvalues. The only eigenvalue of the matrix $\rho(x)$ is the $1$ and for $x\neq0$ its eigenspace is the space $U=\mathbb{R}\{(1,0)^t\}$, which is one dimensional. This means that our representation could not be written as the sum of two other representations. Notice that although both $U$ and $\faktor{\mathbb{R}^2}{U}$ are equipped with an $\rho$-induced action and also $U\oplus\faktor{\mathbb{R}^2}{U}\cong\mathbb{R}^2$ as vector spaces, the equivalence does not hold through for the additional structure of a representation. In fact we have:
 $$\rho_i(x)(u)=u$$
 for any $u\in U$ and any $x\in\mathbb{R}$. Moreover for the class $(0,1)^t+U$ we get: 
 $$\rho_i(x)((0,1)^t+U)=(x,1)^t+U=(0,1)^t+U$$
@@ -115,14 +245,19 @@ This means that the following definition makes sense:
 If a representation is not indecomposable, it is called \ul{decomposable}
 \end{definition}
 
-From the definitions it is clear that irreducibility implies indecomposability and from the example it is clear that the other implication is not necessarily true. In the next section we are going to restrict ourselves in cases of representations where the irreducibility is the same as indecomposability and we will see our first characterization theorems.
+From the definitions it is clear that irreducibility implies indecomposability and from the example it is clear that the other implication is not necessarily true. 
 
-\chapter{Finite abelian Groups}
-
-
-
-
-
-
-
-
+%example for k=Z2, |G|=0 mod2.
+%prerequisites for Maschke
+%Maschke for chark=0 and >0
+%Formulas for dimV and <V,W> (pages 25-30 from Tom Dieck)
+%
+%difference between k=R and k=C for G=D6 (?)
+%
+%example of G=D6 (end of Lecture 1 from Fulton)
+%
+%new section?
+%Characters
+%
+%
+%Bibliography: Tom Dieck, Fulton, Cohomology of grps, ...
